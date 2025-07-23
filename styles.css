@@ -1,0 +1,27 @@
+.text{
+    text-align: center;
+
+}
+
+html,body{
+    height:100%;
+    margin:0;
+    padding: 0%;
+}
+
+body {
+ color:white;
+    background-image: url("green-swamp-1705051229Gq8.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+img{
+   position: relative;
+   height: 300px;
+    width:300px;
+   left:50%;
+   transform: translateX(-50%);
+   top: 3%;
+}
