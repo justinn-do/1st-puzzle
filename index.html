@@ -1,21 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-    <link rel="stylesheet" href="styles.css">
-    <meta charset="utf-8">
-    <title>The woman</title>
-    <!-- Congratulations on solving your first No.1 challenge, go to https://ohlonecicada.netlify.app/ 
-     as this page will be the place where all the challenges will be posted. Thiss puzzles key is: INSPECT -->
-   </head>
-   <body>
+<head>
+  <meta charset="utf-8">
+  <title>The woman</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Congratulations on solving your first No.1 challenge, the page that this puzzle will lead you to
+   will be the landing page where all current puzzles will be posted so keep it bookmarked!
+       This puzzle's key is: INSPECT -->
+  <style>
+    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: system-ui, sans-serif;
+      line-height: 1.5;
+      text-align: center;
+     
+    }
+
+    h1.text {
+      font-size: 1.2rem; /* scales down on mobile */
+    }
+
+    img {
+      max-width: 90%;
+      height: auto;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+
+    input, button {
+      display: block;
+      width: 90%;
+      max-width: 320px;
+      margin: 0.5rem auto;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background: #555;
+    }
+
+    #result {
+      margin-top: 0.5rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="text">
+    You overhear a woman speaking to herself. You approach her and she tells
+    you that "The body is everything but only a head can think and make comments. 
+    To find out what's in the body, <br><br>
+    9 + 14 + 19 + 16 + 5 + 3 + 20 <br><br><br>
+    5 - 12 - 15 - 13 - 5 -14 - 20"
+  </h1>
+
   
 
-   <h1 class="text">You overhear a woman speaking to herself. You approach her and she tells
-     you that "The body is everything but only a head can think and make comments. To find out what's in the body, <br> <br> 
-     9 + 14 + 19 + 16 + 5 + 3 + 20 <br> <br> <br>5 - 12 - 15 - 13 - 5 -14 - 20"</h1>
-    
-   
-     <img src="Adobe Express - file.png">
-   
-   </body>
+  <input id="password" type="text" placeholder="password">
+  <button id="submitBtn">Submit</button>
+  <p id="result"></p>
+
+  <script>
+    const correctAnswer = "INSPECT"; // answer to check against
+    const input = document.getElementById("password");
+    const button = document.getElementById("submitBtn");
+    const result = document.getElementById("result");
+
+    // click submit
+    button.addEventListener("click", checkAnswer);
+    // allow Enter key
+    input.addEventListener("keypress", e => {
+      if (e.key === "Enter") checkAnswer();
+    });
+
+    function checkAnswer() {
+      if (input.value.trim().toUpperCase() === correctAnswer) {
+        window.location.href = "https://ohlonecicada.netlify.app/";
+      } else {
+        result.textContent = "❌ Try again.";
+        result.style.color = "red";
+      }
+    }
+  </script>
+</body>
 </html>
