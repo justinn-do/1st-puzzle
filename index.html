@@ -2,97 +2,153 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>The woman</title>
+  <title>The Woman</title>
   <link rel="stylesheet" href="styles.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Congratulations on solving your first No.1 challenge, the page that this puzzle will lead you to
-   will be the landing page where all current puzzles will be posted so keep it bookmarked!
+  <!-- Congratulations on solving your first No.1 challenge.
+       The page this puzzle leads to will be the landing page for all current puzzles.
+       Keep it bookmarked.
        This puzzle's key is: INSPECT -->
   <style>
+    /* General dark theme */
     body {
       margin: 0;
       padding: 1rem;
-      font-family: system-ui, sans-serif;
+      font-family: 'Courier New', monospace;
       line-height: 1.5;
       text-align: center;
-     
+      background: radial-gradient(circle at top, #000 30%, #111 100%);
+      color: #e0e0e0;
+      overflow-x: hidden;
+      position: relative;
     }
 
+    /* Flickering background overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.1) 1px,
+        rgba(0, 0, 0, 0.2) 2px
+      );
+      mix-blend-mode: multiply;
+      animation: flicker 2.5s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.3; }
+      70% { opacity: 0.2; }
+    }
+
+    /* Ominous heading */
     h1.text {
-      font-size: 1.2rem; /* scales down on mobile */
+      font-size: 1.3rem;
+      color: #d01111;
+      text-shadow: 0 0 5px rgba(184, 0, 0, 0.8), 0 0 15px rgba(255, 0, 0, 0.5);
+      animation: pulse 3s infinite ease-in-out;
+      max-width: 700px;
+      margin: auto;
     }
 
-    img {
-      max-width: 90%;
-      height: auto;
-      margin: 1rem 0;
-      border-radius: 8px;
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 8px rgba(184,0,0,0.8), 0 0 20px rgba(255,0,0,0.6); }
+      50% { text-shadow: 0 0 15px rgba(255,0,0,1), 0 0 30px rgba(255,0,0,0.8); }
     }
 
+    /* Inputs and button */
     input, button {
       display: block;
       width: 90%;
       max-width: 320px;
-      margin: 0.5rem auto;
+      margin: 0.8rem auto;
       padding: 0.6rem;
       font-size: 1rem;
       border-radius: 6px;
-      border: 1px solid #ccc;
+      background: #1a1a1a;
+      border: 1px solid #444;
+      color: #fff;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #b80000;
+      box-shadow: 0 0 10px #b80000;
     }
 
     button {
-      background: #333;
-      color: #fff;
-      cursor: pointer;
+      background: #b80000;
       border: none;
+      cursor: pointer;
     }
 
     button:hover {
-      background: #555;
+      background: #8a0000;
+      transform: scale(1.05);
     }
 
+    /* Result feedback */
     #result {
-      margin-top: 0.5rem;
+      margin-top: 0.8rem;
       font-weight: bold;
+      min-height: 1.2rem;
+    }
+
+    /* Subtle glitch effect */
+    @keyframes glitch {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -1px); }
+      60% { transform: translate(1px, 1px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .glitch {
+      animation: glitch 0.4s infinite;
     }
   </style>
 </head>
 <body>
-  <h1 class="text">
-    You overhear a woman speaking to herself. You approach her and she tells
-    you that "The body is everything but only a head can think and make comments. 
-    To find out what's in the body, <br><br>
-    9 + 14 + 19 + 16 + 5 + 3 + 20 <br><br><br>
-    5 - 12 - 15 - 13 - 5 -14 - 20"
+  <h1 class="text glitch">
+    You overhear a woman speaking softly to herself...<br><br>
+    When you approach, her voice trembles:<br><br>
+    <em>"The body is everything, but only a head can think and make comments.<br>
+    To find out what's in the body..."</em><br><br>
+    <strong>9 + 14 + 19 + 16 + 5 + 3 + 20</strong><br><br><br>
+    <strong>5 - 12 - 15 - 13 - 5 - 14 - 20</strong>
   </h1>
 
-  
-
-  <input id="password" type="text" placeholder="password">
+  <input id="password" type="text" placeholder="Enter password">
   <button id="submitBtn">Submit</button>
   <p id="result"></p>
 
   <script>
-    const correctAnswer = "INSPECT"; // answer to check against
+    const correctAnswer = "INSPECT"; 
     const input = document.getElementById("password");
     const button = document.getElementById("submitBtn");
     const result = document.getElementById("result");
-
-    // click submit
-    button.addEventListener("click", checkAnswer);
-    // allow Enter key
-    input.addEventListener("keypress", e => {
-      if (e.key === "Enter") checkAnswer();
-    });
 
     function checkAnswer() {
       if (input.value.trim().toUpperCase() === correctAnswer) {
         window.location.href = "https://ohlonecicada.netlify.app/";
       } else {
-        result.textContent = "❌ Try again.";
-        result.style.color = "red";
+        result.textContent = "❌ Wrong...";
+        result.style.color = "#b80000";
       }
     }
+
+    button.addEventListener("click", checkAnswer);
+    input.addEventListener("keypress", e => {
+      if (e.key === "Enter") checkAnswer();
+    });
   </script>
 </body>
 </html>
